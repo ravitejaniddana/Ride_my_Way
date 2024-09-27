@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin - Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/public/css/main.cs" />
+    <script src="static/js/create_ride.js" type="module"></script>
+    <style>
+        :root{
+		--yellow:#EBB14D;
+		--darkblue:#3A3C6C;
+		--light:#cfd8ef;
+		--white:#fff;
+	}
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Tahoma', Monaco, "Courier New", Courier, monospace;
+            background-color: #f5f5f5;
+        }
+        
+        /** DEFAULT HEADING SIZES */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+        }
+        
+        p {
+            font-size: 15px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav_wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            background-color: #34495e;
+            padding: 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+        }
+        
+        .nav_wrapper header {
+            margin-left: 30px;
+        }
+        
+        .nav_wrapper nav {
+            margin-right: 30px;
+        }
+        
+        .nav_wrapper ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            margin-right: 30px;
+            padding-right: 30px;
+        }
+        
+        .nav_wrapper a {
+            text-decoration: none;
+            color: silver;
+            padding: 10px;
+        }
+        
+        .nav_wrapper nav a:hover {
+            color: white;
+        }
+        
+        .toggle-button {
+            margin-right: 30px;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+        
+        .toggle-button span {
+            display: block;
+            background-color: silver;
+            width: 30px;
+            height: 5px;
+            margin: 3px;
+        }
+        
+        /*#### TOGGLE THE HUBER GER MENU**/
+        @media (min-width: 768px) {
+            .toggle-button {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav_wrapper header {
+                margin-left: 10px;
+            }
+        
+            .nav_wrapper nav {
+                display: none;
+            }
+        }
+        
+        .footer_wrapper {
+            display: flex;
+            flex-direction: column;
+            color: silver;
+        }
+        
+        /***** TOP FOOTER **********/
+        .top_footer_section {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            background-color: #34495e;
+            padding: 50px 100px;
+        }
+        
+        .footer_column {
+            width: 30%;
+        }
+        
+        .footer_column h1 {
+            padding-bottom: 20px;
+            font-size: large;
+            color: white;
+        }
+        
+        .bottom_footer_section {
+            background-color: #2c3e50;
+            font-style: italic;
+            padding: 20px 100px;
+        }
+        
+        /* ******** FOOTER AT A WIDTH OF 768PX ******* */
+        @media (max-width: 768px) {
+            .top_footer_section {
+                display: flex;
+                flex-direction: column;
+                padding: 30px 50px;
+            }
+        
+            .footer_column {
+                margin-bottom: 20px;
+                width: 100%;
+            }
+        
+            .bottom_footer_section {
+                padding: 30px 30px;
+            }
+        }
+        
+        /* Advanced Styling for Form */
+        .create_ride_form {
+            background-color:var(--light);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            padding-top: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #34495e;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input[type="text"]:focus,
+        .form-group input[type="number"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .form-group button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .form-group button:hover {
+            background-color: #27ae60;
+        }
+        
+        .form-group .button.default {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            
+        
+        }
+        
+        .form-group .button.default:hover {
+            background-color: #c0392b;
+        }
+        </style>
+        
+</head>
+<body>
+    <div class="big_wrapper">
+        <div class="nav_wrapper">
+            <header><h2><a href="available_ride_offers.html">Ride-my-way</a></h2></header>
+            <nav>
+                <ul>
+                    <li><a href="available_ride_offers.html">Home</a></li>
+                    <li><a href="profile_page_rides_given_and_taken.html" id="currentLoginUsername"></a></li>
+                    <li id="logoutThisUser"><a href="#">Logout</a></li>
+                </ul>
+            </nav>
+            <div class="toggle-button" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="content_area">
+            <div class="create_ride_wrapper">
+                <h2>Create a Ride</h2>
+                <p>Fill in the details to create a ride offer.</p>
+                <form class="create_ride_form" id="createRideForm">
+                    <div class="form-group">
+                        <label for="origin">Origin</label>
+                        <input type="text" id="origin" placeholder="Type origin" name="origin" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <input type="text" id="destination" placeholder="Type destination" name="destination" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="meet_point">Meet Point</label>
+                        <input type="text" id="meet_point" placeholder="Type meet point" name="meet_point" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="contribution">Contribution Amount (in PI)</label>
+                        <input type="number" id="contribution" placeholder="Amount" name="amount" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="free_spots">Number of Passengers</label>
+                        <input type="number" id="free_spots" placeholder="Number of customers" name="free_spots" required oninput="calculateTotal()">
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="total_amount">Total Amount (in PI)</label>
+                        <input type="text" id="total_amount" placeholder="Total amount" name="total_amount" readonly>
+                    </div>
+                
+                    <div class="form-group">
+                        <button type="submit" class="success">Create Ride</button>
+                        <a href="#" class="button default" style="margin-left: 10px;">Back</a>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer_wrapper">
+            <div class="top_footer_section">
+                <div class="footer_column">
+                    <h1>About Us</h1>
+                    <p>I am a full stack developer and Flutter developer.</p><br>
+                    <p>I specialize in building responsive web and mobile applications. I'm passionate about creating user-friendly experiences and continuously improving my skills in technology.</p>
+                </div>
+                <div class="footer_column">
+                    <h1>What I Do</h1>
+                    <span>Full stack development</span><br>
+                    <span>UI/UX design</span><br>
+                    <span>Flutter App Developer</span>
+                    <span>Freelancer</span>
+
+                </div>
+                <div class="footer_column">
+                    <h1>Contacts</h1>
+                    <span>Email:&nbsp; <a href="mailto:lovelyravitej855@gmail.com">lovelyravitej855@gmail.com</a></span><br>
+                    <span>LinkedIn: &nbsp; <a href="https://www.linkedin.com/in/ravitej-niddana" target="_blank">Ravitej Niddana</a></span><br>
+                    <span>GitHub: &nbsp; <a href="https://github.com/ravitejaniddana" target="_blank">ravitejaniddana</a></span><br>
+                    <span>Phone: (+91) 9392584579</span>
+                </div>
+                
+            </div>
+            <div class="bottom_footer_section">
+                <p>&copy; N Raviteja | All rights reserved</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+    let form = document.getElementById('createRideForm');
+
+    // Modal functionality
+    const modal = document.createElement('div');
+    modal.id = "successModal";
+    modal.style.display = "none"; // Initially hide the modal
+    modal.style.position = "fixed";
+    modal.style.zIndex = "1000";
+    modal.style.left = "0";
+    modal.style.top = "0";
+    modal.style.width = "100%";
+    modal.style.height = "100%";
+    modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    modal.style.justifyContent = "center";
+    modal.style.alignItems = "center";
+    modal.innerHTML = `
+        <div style="background: white; padding: 20px; border-radius: 5px; text-align: center;">
+            <span class="close" style="cursor:pointer; float:right; font-size:20px;">&times;</span>
+            <h3>Ride Created Successfully!</h3>
+            <p>Your ride has been added to the list.</p>
+            <button style="padding: 10px 20px; background-color: #5cb85c; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="window.location.href='profile_page_rides_given_and_taken.html'">Go to Profile</button>
+        </div>`;
+    document.body.appendChild(modal);
+
+    const closeBtn = modal.getElementsByClassName("close")[0];
+
+    // Event listener for form submission
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Collecting form data
+        let rideData = {
+            origin: form.origin.value,
+            destination: form.destination.value,
+            meet_point: form.meet_point.value,
+            contribution: parseFloat(form.contribution.value),
+            free_spots: parseInt(form.free_spots.value, 10)
+        };
+
+        // Fetch existing rides from localStorage or create an empty array if none exist
+        let existingRides = JSON.parse(localStorage.getItem('rides')) || [];
+
+        // Add the new ride to the list
+        existingRides.push(rideData);
+
+        // Save updated rides list back to localStorage
+        localStorage.setItem('rides', JSON.stringify(existingRides));
+
+        // Show the modal
+        modal.style.display = "flex";
+
+        // Close the modal and redirect after clicking the close button
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+            window.location.replace('profile_page_rides_given_and_taken.html');
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+                window.location.replace('profile_page_rides_given_and_taken.html');
+            }
+        }
+    });
+
+    function calculateTotal() {
+        const contributionAmount = parseFloat(document.getElementById('contribution').value) || 0; // Get contribution amount set by the driver
+        const numPassengers = parseInt(document.getElementById('free_spots').value) || 0; // Get number of passengers
+        const totalAmountField = document.getElementById('total_amount'); // Get the total amount field
+
+        // Calculate total amount
+        const totalAmount = contributionAmount * numPassengers;
+
+        // Update the total amount field
+        totalAmountField.value = totalAmount.toFixed(2); // Keep two decimal places
+    }
+</script>
+
+</body>
+</html>

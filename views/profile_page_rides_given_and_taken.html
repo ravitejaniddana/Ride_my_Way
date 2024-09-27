@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ride-My-Way: Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Adjusted Path for CSS -->
+     <link rel="stylesheet" type="text/css" media="screen" href="/public/css/profile_page_rides_given_and_taken.css" />
+    
+</head>
+<body>
+    <div class="big_wrapper">
+        <!-- Navigation -->
+        <div class="nav_wrapper">
+            <header><h2><a href="available_ride_offers.html">Ride-my-way</a></h2></header>
+            <nav>
+                <ul>
+                    <li><a href="available_ride_offers.html">Home</a></li>
+                    <li><a href="profile_page_rides_given_and_taken.html" id="currentLoginUsername"></a></li>
+                    <li id="logoutThisUser"><a href="#">Logout</a></li>
+                </ul>
+            </nav>
+            <div class="toggle-button" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content_area">
+            <div class="page_header">
+                <h2>User Profile</h2>
+                <p>You can edit your profile and manage your rides here.</p>
+            </div>
+
+            <!-- Profile Wrapper -->
+            <div class="profile_wrapper">
+                <div class="profile_top">
+                    <div class="profile_pic">
+                        <img src="static/images/phillis.jpg" style="height: 150px;width: 150px; border-radius: 50%;">
+                    </div>
+                    <div class="user_summary_info">
+                        <div class="username_edit_profile">
+                            <h2 id="displayUsername">Username</h2><!-- Username of the current user -->
+                            <a href="edit_user_profile.html"><button>View profile</button></a>
+                        </div>
+                        
+                        <!-- Ride Info Section -->
+                        <div class="rides_count">
+                            <ul>
+                                <li id="ridesGivenButton" class="active_ride_status">
+                                    <a href="#" onclick="switchToGivenRides()">Rides Given: <span id="numOfRidesGiven">0</span></a>
+                                </li>
+                                <li id="ridesTakenButton" class="inactive_ride_status">
+                                    <a href="#" onclick="switchToTakenRides()">Rides Taken: <span id="numOfRidesTaken">0</span></a>
+                                </li>
+                                <li class="inactive_ride_status"><a href="manage_requests.html">Requests</a></li>
+                                <li class="create_ride_link"><a href="create_ride.html">Create Ride <span>+</span></a></li>
+                            </ul>
+                        </div>
+
+                        <!-- User Bio -->
+                        <div class="user_bio">
+                            <h4>Email: <small id="displayUserEmail">example@mail.com</small></h4>
+                            <h4>Mobile: <small id="displayUserPhone">+123456789</small></h4>
+                            <p id="displayUserBio">This is the user's bio.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <hr style="margin: 30px 0; color: silver; opacity: 0.5">
+
+                <!-- Profile Bottom: Ride Details -->
+                <div class="profile_bottom" id="giveRidesDisplayArea" style="display: block;">
+                    <!-- Display Rides Given -->
+                </div>
+                <div class="profile_bottom" id="takenRidesDisplayArea" style="display: none;">
+                    <!-- Display Rides Taken -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer_wrapper">
+            <div class="top_footer_section">
+                <div class="footer_column">
+                    <h1>About Us</h1>
+                    <p>I am a full stack developer and Flutter developer. I specialize in building responsive web and mobile applications.</p>
+                </div>
+                <div class="footer_column">
+                    <h1>What I Do</h1>
+                    <span>Full stack development</span><br>
+                    <span>UI/UX design</span><br>
+                    <span>Flutter App Developer</span>
+                </div>
+                <div class="footer_column">
+                    <h1>Contacts</h1>
+                    <span>Email: <a href="mailto:lovelyravitej855@gmail.com">lovelyravitej855@gmail.com</a></span><br>
+                    <span>LinkedIn: <a href="https://www.linkedin.com/in/ravitej-niddana" target="_blank">Ravitej Niddana</a></span><br>
+                    <span>GitHub: <a href="https://github.com/ravitejaniddana" target="_blank">ravitejaniddana</a></span><br>
+                    <span>Phone: (+91) 9392584579</span>
+                </div>
+            </div>
+            <div class="bottom_footer_section">
+                <p>&copy; N Raviteja | All rights reserved</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Adjusted JavaScript Path -->
+    <script src="public/js/profile_page_rides_given_and_taken.js" type="module"></script>
+</body>
+</html>

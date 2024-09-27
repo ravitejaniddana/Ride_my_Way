@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Create Ride - Ride-my-way</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/create_ride.css">
+
+</head>
+<body>
+    <div class="big_wrapper">
+        <div class="nav_wrapper">
+            <header>
+                <h2><a href="available_ride_offers.html" style="color: var(--white); text-decoration: none;">Ride-my-way</a></h2>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="profile_page_rides_given_and_taken.html" id="currentLoginUsername"></a></li>
+                        <li id="logoutThisUser"><a href="#">Logout</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+        <div class="content_area">
+            <div class="create_ride_wrapper">
+                <h2>Create a Ride</h2>
+                <p>Fill in the details to create a ride offer.</p>
+                <form class="create_ride_form" id="createRideForm">
+                    <div class="form-group">
+                        <label for="origin">Origin</label>
+                        <input type="text" id="origin" placeholder="Type origin" name="origin" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <input type="text" id="destination" placeholder="Type destination" name="destination" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="meet_point">Meet Point</label>
+                        <input type="text" id="meet_point" placeholder="Type meet point" name="meet_point" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="contribution">Contribution Amount (in PI)</label>
+                        <input type="number" id="contribution" placeholder="Amount" name="amount" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="free_spots">Number of Passengers</label>
+                        <input type="number" id="free_spots" placeholder="Number of customers" name="free_spots" required oninput="calculateTotal()">
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="total_amount">Total Amount (in PI)</label>
+                        <input type="text" id="total_amount" placeholder="Total amount" name="total_amount" readonly>
+                    </div>
+                
+                    <div class="form-group">
+                        <button type="submit" class="success">Create Ride</button>
+                        <a href="#" class="button default" style="margin-left: 10px;">Back</a>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+        <footer>
+            <div class="footer_column">
+                <h1>About Us</h1>
+                <p>Your ride-sharing solution.</p>
+            </div>
+            <div class="footer_column">
+                <h1>What We Do</h1>
+                <span>Ride-sharing</span><br>
+                <span>Community Engagement</span><br>
+            </div>
+            <div class="footer_column">
+                <h1>Contacts</h1>
+                <span>Email: <a href="mailto:lovelyravitej855@gmail.com" style="color: var(--yellow);">lovelyravitej855@gmail.com</a></span><br>
+                <span>LinkedIn: <a href="https://www.linkedin.com/in/ravitej-niddana" target="_blank" style="color: var(--yellow);">Ravitej Niddana</a></span><br>
+            </div>
+            <p>&copy; N Raviteja | All rights reserved</p>
+        </footer>
+    </div>
+    <script src="static/js/create_ride.js" type="module"></script>
+    <script>
+    let form = document.getElementById('createRideForm');
+
+    // Modal functionality
+    const modal = document.getElementById("successModal");
+    const closeBtn = document.getElementsByClassName("close")[0];
+
+    // Event listener for form submission
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        
+        // Collecting form data
+        let rideData = {
+            origin: form.origin.value,
+            destination: form.destination.value,
+            meet_point: form.meet_point.value,
+            contribution: parseFloat(form.contribution.value),
+            free_spots: parseInt(form.free_spots.value, 10)
+        };
+
+        // Fetch existing rides from localStorage or create an empty array if none exist
+        let existingRides = JSON.parse(localStorage.getItem('rides')) || [];
+        
+        // Add the new ride to the list
+        existingRides.push(rideData);
+        
+        // Save updated rides list back to localStorage
+        localStorage.setItem('rides', JSON.stringify(existingRides));
+        
+        // Show the modal
+        modal.style.display = "block";
+
+        // Close the modal and redirect after clicking the close button
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+            window.location.replace('profile_page_rides_given_and_taken.html');
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                window.location.replace('profile_page_rides_given_and_taken.html');
+            }
+        }
+    });
+
+    function calculateTotal() {
+        const contributionAmount = parseFloat(document.getElementById('contribution').value) || 0; // Get contribution amount set by the driver
+        const numPassengers = parseInt(document.getElementById('free_spots').value) || 0; // Get number of passengers
+        const totalAmountField = document.getElementById('total_amount'); // Get the total amount field
+
+        // Calculate total amount
+        const totalAmount = contributionAmount * numPassengers;
+
+        // Update the total amount field
+        totalAmountField.value = totalAmount.toFixed(2); // Keep two decimal places
+    }
+
+
+
+        function calculateTotal() {
+    const contributionAmount = parseFloat(document.getElementById('contribution').value) || 0; // Get contribution amount set by the driver
+    const numPassengers = parseInt(document.getElementById('free_spots').value) || 0; // Get number of passengers
+    const totalAmountField = document.getElementById('total_amount'); // Get the total amount field
+
+    // Calculate total amount
+    const totalAmount = contributionAmount * numPassengers;
+
+    // Update the total amount field
+    totalAmountField.value = totalAmount.toFixed(2); // Keep two decimal places
+}
+
+
+    </script>
+    <!-- Modal HTML -->
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Ride created successfully!</p>
+    </div>
+</div>
+
+</body>
+</html>

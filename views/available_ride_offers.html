@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin - Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        :root {
+            --yellow: #EBB14D;
+            --darkblue: #3A3C6C;
+            --light: #cfd8ef;
+            --white: #fff;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui;
+        }
+        .big_wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .nav_wrapper {
+            background: var(--yellow);
+            padding: 10px 0;
+            color: var(--white);
+        }
+        .nav_wrapper header {
+            text-align: center;
+        }
+        .nav_wrapper nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+        .nav_wrapper nav ul li {
+            padding: 15px 20px;
+        }
+        .nav_wrapper nav ul li a {
+            text-decoration: none;
+            color: var(--white);
+        }
+        .nav_wrapper nav ul li a:hover {
+            text-decoration: none;
+            color: var(--darkblue);
+        }
+        .content_area {
+            flex: 1;
+            padding: 20px;
+            background: var(--light);
+        }
+        .page_header {
+            margin-bottom: 20px;
+        }
+        .available_ride_offers_wrapper {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .ride {
+            background: var(--white);
+            padding: 15px;
+            border: 1px solid var(--darkblue);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .ride:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .ride h3 {
+            margin-bottom: 10px;
+            color: var(--darkblue);
+        }
+        .ride p {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .book_button {
+            background: var(--yellow);
+            border: none;
+            border-radius: 5px;
+            color: var(--darkblue);
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .book_button:hover {
+            background: #d4a73b;
+        }
+        .footer_wrapper {
+    display: flex;
+    flex-direction: column;
+    color: silver;
+    margin-top: auto; 
+
+.top_footer_section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #34495e;
+    padding: 50px 100px;
+}
+
+.footer_column {
+    width: 30%; 
+
+.footer_column h1 {
+    padding-bottom: 20px;
+    font-size: large;
+    color: white;
+}
+
+.bottom_footer_section {
+    background-color: #2c3e50;
+    font-style: italic;
+    padding: 20px 100px;
+    text-align: center; 
+}
+
+@media (max-width: 768px) {
+    .top_footer_section {
+        flex-direction: column;
+        padding: 30px 50px;
+    }
+
+    .footer_column {
+        margin-bottom: 20px;
+        width: 100%; 
+    }
+
+    .bottom_footer_section {
+        padding: 30px 30px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="big_wrapper">
+        <div class="nav_wrapper">
+            <header><h2><a href="available_ride_offers.html" style="color: var(--white); text-decoration: none;">Ride-my-way</a></h2></header>
+            <nav>
+                <ul>
+                    <li><a href="passenger_dashboard.html">Home</a></li>
+                    <li><a href="profile_page_rides_given_and_taken.html" id="currentLoginUsername"></a></li>
+                    <li id="logoutThisUser"><a href="#">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="content_area">
+            <div class="page_header">
+                <h2>Available Ride Offers</h2>
+                <p>You can view details of the ride offers. You can even request for an offer.</p>
+                <p style="float: right">For more information, click your username in the upper right corner.</p>
+            </div>
+            <div class="available_ride_offers_wrapper" id="availableRideArea">
+            </div>
+        </div>
+        <footer class="footer_wrapper">
+            <div class="footer_column">
+                <h1>About Us</h1>
+                <p>I am a full stack developer and Flutter developer.</p>
+                <p>I specialize in building responsive web and mobile applications. I'm passionate about creating user-friendly experiences and continuously improving my skills in technology.</p>
+            </div>
+            <div class="footer_column">
+                <h1>What I Do</h1>
+                <span>Full stack development</span>
+                <span>UI/UX design</span>
+                <span>Flutter App Developer</span>
+                <span>Freelancer</span>
+            </div>
+            <div class="footer_column">
+                <h1>Contacts</h1>
+                <span>Email:&nbsp; <a href="mailto:lovelyravitej855@gmail.com">lovelyravitej855@gmail.com</a></span>
+                <span>LinkedIn: &nbsp; <a href="https://www.linkedin.com/in/ravitej-niddana" target="_blank">Ravitej Niddana</a></span>
+                <span>GitHub: &nbsp; <a href="https://github.com/ravitejaniddana" target="_blank">ravitejaniddana</a></span>
+                <span>Phone: (+91) 9392584579</span>
+            </div>
+            <div class="bottom_footer_section">
+                <p>&copy; N Raviteja | All rights reserved</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function loadAvailableRides() {
+            let rides = JSON.parse(localStorage.getItem('rides')) || [];
+
+            let availableRideArea = document.getElementById('availableRideArea');
+
+            if (rides.length === 0) {
+                availableRideArea.innerHTML = '<p>No rides available at the moment.</p>';
+                return;
+            }
+
+            rides.forEach((ride, index) => {
+                let rideHTML = `
+                    <div class="ride">
+                        <h3>Ride #${index + 1}</h3>
+                        <p><strong>Starting:</strong> ${ride.origin}</p>
+                        <p><strong>Destination:</strong> ${ride.destination}</p>
+                        <p><strong>Meet Point:</strong> ${ride.meet_point}</p>
+                        <p><strong>No of Passengers:</strong> ${ride.free_spots}</p>
+                        <p><strong>Fare Contribution:</strong> ${ride.contribution} Pi</p>
+                        <button class="book_button">Book Ride</button>
+                    </div>
+                `;
+                availableRideArea.innerHTML += rideHTML;
+            });
+        }
+
+        window.onload = loadAvailableRides;
+    </script>
+</body>
+</html>
