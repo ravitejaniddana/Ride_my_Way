@@ -7,10 +7,8 @@ export let acceptedRideUrl = "accepted_ride_request.html";
 export let profilePageDisplayRidesUrl = "profile_page_rides_given_and_taken.html";
 export let manageRequests = "manage_requests.html";
 export let hostAndPortUrl = "https://carpool-api-andela.herokuapp.com";
-//export let hostAndPortUrl = "http://127.0.0.1:5000";
 
 
-// this currently returns the user token
 export function getTokenFromVerifyUser() {
     return localStorage.getItem('Token');
 }
@@ -57,7 +55,6 @@ export function logoutUser() {
     window.location.replace(loginPageUrl)
 }
 
-// Also include the URL to where the page should be redirected
 function fetchCurrentUserInfo(pathToResource, RedirectUrlParameter) {
     fetch(pathToResource) // 1
     .then((response) => response.json()) // 2
@@ -77,24 +74,19 @@ function fetchCurrentUserInfo(pathToResource, RedirectUrlParameter) {
 
 
 export function getUserInfo(RedirectUrlParameter) {
-        // this function retrieves the info of the current user
-        // It updates the userInfo key of VerifyUser
-        // also confirms if user is really logged in
+  
         const userInfoUrl = hostAndPortUrl+"/api/v1/current/user/info";
 
         let header = new Headers({"Content-Type": "application/json",
                                   "Authorization": getTokenFromVerifyUser()});
 
-        // new Request(uri, option);
         let option = {
             method: "GET",
-            //credentials: "same-origin",
             headers: header
         };
 
         let req = new Request(userInfoUrl, option);
 
-        // call to the function that fetches the current user info
         fetchCurrentUserInfo(req, RedirectUrlParameter);
 
     }

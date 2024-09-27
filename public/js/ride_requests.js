@@ -1,5 +1,4 @@
 
-//logoutUser, loginPageUrl, getFromCurrentUserInfo, getTokenFromVerifyUser, getUserInfo, saveToCurrentUserInfo
 import {getTokenFromVerifyUser, hostAndPortUrl, logoutUser, getFromCurrentUserInfo, getRideId, loginPageUrl} from './main.js'
 
 export function requestRide(ride_id) {

@@ -107,7 +107,6 @@ let rides_req = new Request(rideDetailUrl, option);
 fetchRideGivenJSON(rides_req);
 
 
-/*****************************************************************************/
 function displayRideRequests(result) {
     //console.log(result);
     let error = result.myData['message']; // missing or expired token

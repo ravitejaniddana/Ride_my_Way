@@ -2,13 +2,10 @@
 import {getUserInfo, logResult, availableRidesUrl, hostAndPortUrl} from './main.js';
 
 
-/************ Login alone ****************************/
 
 let form = document.getElementById("signInForm");
 
-// hide by default| padding makes it visible
 let loginErrorArea = document.getElementById("loginError");
-//loginErrorArea.style.display = 'none';
 
 
 function readResponseAsJSON(response) {
@@ -22,9 +19,7 @@ function fetchJSON(pathToResource) {
         if(data.Token){
             logResult("Token", data.Token); // setting token
 
-            // specify the url to the page you want to go
             getUserInfo(availableRidesUrl); // setting username
-            //window.location.replace(availableRidesUrl)
         }else{
             loginErrorArea.innerText = data.message;
             loginErrorArea.style.display = 'block';
@@ -37,7 +32,6 @@ function fetchJSON(pathToResource) {
 form.addEventListener('submit', function getInfo(event){
     event.preventDefault();
 
-    // Login with username or email
     let data = {
     password: form.password.value
     };
@@ -60,7 +54,6 @@ form.addEventListener('submit', function getInfo(event){
     // new Request(uri, option);
     let option = {
         method: "POST",
-        //credentials: "same-origin",
         headers: h,
         body: JSON.stringify(data)
     };

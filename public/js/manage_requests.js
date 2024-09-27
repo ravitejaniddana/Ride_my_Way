@@ -1,7 +1,6 @@
 
 
 import {getFromCurrentUserInfo, hostAndPortUrl, logoutUser, loginPageUrl, manageRequests, getCancelRequestId, logResult, getTokenFromVerifyUser, profilePageDisplayRidesUrl} from './main.js'
-// is displayed in the navigation bar
 let usernameDisplayArea = document.getElementById('currentLoginUsername');
 usernameDisplayArea.innerText = getFromCurrentUserInfo();
 
@@ -10,19 +9,16 @@ logoutThisUser.onclick = function () {
     logoutUser();
 };
 
-/**************************************************************/
 let rideRequestDisplayArea = document.getElementById('rideRequestDisplayArea');
 function displayRideGiven(result) {
-    let error = result.myData['message']; // missing or expired token
+    let error = result.myData['message']; 
     let myRequests = result.myData["Ride_requests"];
 
     if (result.status === 401 || result.status === 500){
-        // Token missing or internal server error
         alert(error);
         window.location.replace(loginPageUrl);
 
     }else if(result.status === 404){
-        // no requests made to the ride yet
         alert(error);
         window.location.replace(profilePageDisplayRidesUrl)
 
@@ -109,10 +105,8 @@ const requestsUrl = hostAndPortUrl+"/api/v1/user/requests";
 let requests_header = new Headers({"Content-Type": "application/json",
                           "Authorization": getTokenFromVerifyUser()});
 
-// new Request(uri, option);
 let option = {
     method: "GET",
-    //credentials: "same-origin",
     headers: requests_header
 };
 
@@ -121,13 +115,11 @@ let requests_req = new Request(requestsUrl, option);
 fetchRideGivenJSON(requests_req);
 
 
-/**************** Delete request *****************************/
 
 function logCancelRequest(result) {
-    let messageResult = result.myData['message']; // missing or expired token
+    let messageResult = result.myData['message']; 
 
     if (result.status === 401 || result.status === 500){
-        // Token missing or internal server error
         alert(messageResult);
         window.location.replace(loginPageUrl);
 
@@ -173,8 +165,7 @@ function activateCancelButton(){
             logResult("cancel_request_id", mydiv.id);
             console.log(mydiv.id);
             console.log(getCancelRequestId());
-            // window.location.replace('request_ride.html');
-            let r = confirm("Confirm Cancellation of request\n Click Cancel to ignore");
+\            let r = confirm("Confirm Cancellation of request\n Click Cancel to ignore");
             if (r == true) {
                 const cancelRequestsUrl = hostAndPortUrl+"/api/v1/rides/"+getCancelRequestId()+"/requests/cancel";
                 let requests_req = new Request(cancelRequestsUrl, option_req);

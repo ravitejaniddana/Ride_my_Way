@@ -1,9 +1,6 @@
-/**
- * Created by Dr.Kimpatrick on 7/31/2018.
- */
+
 import {getFromCurrentUserInfo, hostAndPortUrl, loginPageUrl, acceptedRideUrl, getTokenFromVerifyUser, logoutUser, getCurrentUserBio, getCurrentUserEmail, getCurrentUserPhoneNumber, logResult, rejectOrAcceptUrl} from './main.js'
 
-// is displayed in the navigation bar
 let usernameDisplayArea = document.getElementById('currentLoginUsername');
 usernameDisplayArea.innerText = getFromCurrentUserInfo();
 
@@ -37,7 +34,6 @@ function displayRidesGiven(result) {
     let numOfRidesGivenDisplayArea = document.getElementById('numOfRidesGiven');
     numOfRidesGivenDisplayArea.innerText = rides.length;
     if (error){
-        // Redirect to the login page
         window.location.replace(loginPageUrl);
 
     }else {
@@ -80,23 +76,18 @@ function displayRidesGiven(result) {
     }
     activateDiv();
 
-    // This callback function is placed here to ensure that the first functio
-    //  that displays rides given is fully executed
     const taken_rides_uri = hostAndPortUrl+"/api/v1/this/user/rides/taken";
 
     let myHeader = new Headers({"Content-Type": "application/json",
                               "Authorization": getTokenFromVerifyUser()});
 
-    // new Request(uri, option);
     let option_taken_rides = {
         method: "GET",
-        //credentials: "same-origin",
         headers: myHeader
     };
 
     let taken_rides_req = new Request(taken_rides_uri, option_taken_rides);
 
-    //getAllRidesJSON(rides_req);
     getTakenRidesJSON(taken_rides_req);
 
 }
@@ -140,11 +131,10 @@ function activateDiv(){
 }
 
 
-/*******************************************************************************/
 
 function displayRidesTaken(result) {
     console.log(result);
-    let error = result['message']; // missing or expired token
+    let error = result['message']; 
     let rides = result["Rides taken by "+getFromCurrentUserInfo()];
     console.log(rides.length);
 

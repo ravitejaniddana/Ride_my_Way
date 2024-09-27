@@ -1,5 +1,4 @@
 
-//logoutUser, loginPageUrl, getFromCurrentUserInfo, getTokenFromVerifyUser, getUserInfo, saveToCurrentUserInfo
 import {getTokenFromVerifyUser, hostAndPortUrl, logoutUser, getFromCurrentUserInfo, getRideId, loginPageUrl, logResult} from './main.js'
 
 export function requestRide(ride_id) {
@@ -54,7 +53,6 @@ export function requestRide(ride_id) {
                 </table> `;
 
             toContainRideDetails.innerHTML = myHTML;
-            //document.getElementById('driverName').innerText = rideInfo['Driver details']['name'];
             document.getElementById('driverEmail').innerText = rideInfo['Driver details']['email'];
             document.getElementById('driverMobile').innerText = rideInfo['Driver details']['phone number'];
             document.getElementById('driverGender').innerText = rideInfo['Driver details']['gender']
