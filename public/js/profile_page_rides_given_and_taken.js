@@ -228,7 +228,7 @@ ridesTakenButtonArea.addEventListener("click", function (event) {
     // display only ridesTaken on click
     document.getElementById("takenRidesDisplayArea").style.display = "block";
     document.getElementById("giveRidesDisplayArea").style.display = "none";
-    // alter the active status of the RidesButton
+    // alter the active status of the RideButton
     ridesTakenButtonArea.className = "active_ride_status";
     ridesGivenButtonArea.className = "inactive_ride_status";
 
